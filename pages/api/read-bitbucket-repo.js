@@ -27,9 +27,9 @@ async function readRepo() {
   }
 }
 
-export default function handler(req, res) {
-  const currentUser = bitbucket.users.getAuthedUser({});
-  if (!currentUser.data.account_id) return false;
+export default async function handler(req, res) {
+  const currentUser = await bitbucket.users.getAuthedUser({});
+  console.log({ currentUser });
   try {
     const { data } = bitbucket.repositories.listPermissions({});
     const permission = data.values?.[0]?.permission;
