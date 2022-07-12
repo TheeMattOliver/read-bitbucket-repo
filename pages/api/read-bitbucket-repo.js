@@ -3,9 +3,9 @@ import fetch from "node-fetch";
 
 const clientOptions = {
   baseUrl: "https://api.bitbucket.org/2.0",
-  request: {
-    timeout: 20,
-  },
+  // request: {
+  //   timeout: 20,
+  // },
   auth: {
     username: process.env.BITBUCKET_USERNAME,
     password: process.env.BITBUCKET_SECRET,
@@ -18,10 +18,10 @@ async function readRepo() {
 }
 
 export default async function handler(req, res) {
-  const currentUser = await bitbucket.users.getAuthedUser({});
-
   try {
     // do stuff
+    const currentUser = await bitbucket.users.getAuthedUser({});
+    res.status(200).json({ currentUser: currentUser });
   } catch (e) {
     return e;
   }
