@@ -21,13 +21,8 @@ export default async function handler(req, res) {
   const currentUser = await bitbucket.users.getAuthedUser({});
 
   try {
-    const { data } = bitbucket.repositories.listPermissions({});
-    const permission = data.values?.[0]?.permission;
-
-    const canWrite = !!(permission === "admin" || "write");
-    res.status(200).json({ currentUser: currentUser.data?.account_id });
-    return !!canWrite;
+    // do stuff
   } catch (e) {
-    return false;
+    return e;
   }
 }
